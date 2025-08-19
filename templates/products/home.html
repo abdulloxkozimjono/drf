@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FSB Union - Statistikalar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">FSB Union</a>
+        <div class="ms-auto">
+            <a class="btn btn-outline-light" href="/admin/">Admin panel</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container my-5">
+
+    <!-- Statistikalar -->
+    <h2 class="mb-4">Savdo statistikasi</h2>
+    <div class="row text-center mb-5">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white p-3">
+                <h5>1 kunlik savdo</h5>
+                <p>{{ stats.daily }} UZS</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white p-3">
+                <h5>1 haftalik savdo</h5>
+                <p>{{ stats.weekly }} UZS</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-dark p-3">
+                <h5>1 oylik savdo</h5>
+                <p>{{ stats.monthly }} UZS</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-danger text-white p-3">
+                <h5>1 yillik savdo</h5>
+                <p>{{ stats.yearly }} UZS</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mahsulotlar -->
+    <h2 class="mb-4">Ombordagi mahsulotlar</h2>
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">{{ product.description }}</p>
+                    <p class="card-text"><strong>Narxi:</strong> {{ product.price }} UZS</p>
+                    <p class="card-text"><strong>Soni:</strong> {{ product.quantity }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Botdan kelgan buyurtmalar -->
+    <h2 class="mb-4 mt-5">Bot orqali kelgan buyurtmalar</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Mahsulot</th>
+                    <th>Soni</th>
+                    <th>Telefon</th>
+                    <th>Manzil</th>
+                    <th>Buyurtma vaqti</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.product.name }}</td>
+                    <td>{{ order.quantity }}</td>
+                    <td>{{ order.phone_number }}</td>
+                    <td>{{ order.address }}</td>
+                    <td>{{ order.created_at|date:"Y-m-d H:i" }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="text-center">Buyurtmalar mavjud emas</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<footer class="bg-dark text-white text-center py-3 mt-5">
+    &copy; 2025 FSB Union. Barcha huquqlar himoyalangan.
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
