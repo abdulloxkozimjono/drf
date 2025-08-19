@@ -112,8 +112,11 @@ async def get_address(message: types.Message):
 
 # Botni ishga tushirish
 async def start_bot():
-    await dp.start_polling(bot)
-
+    print("ishladi")
+    try:
+        await dp.start_polling(bot)
+    except Exception as e:
+        print("xato", e)
 
 if __name__ == "__main__":
     asyncio.run(start_bot())

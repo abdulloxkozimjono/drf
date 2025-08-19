@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     # 📦 Local apps
     'products',   # mahsulotlar
     'bot',       # buyurtmalar
+    'tg_bot.apps.TgBotConfig'
 ]
 
 MIDDLEWARE = [
